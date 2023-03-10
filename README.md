@@ -21,3 +21,7 @@ Event management appilcation deals with performing CRUD operations on Events.
 
 
 # Steps to run tests
+
+
+# Reference 
+- [https://www.freecodecamp.org/news/how-to-dockerize-a-flask-app/](https://www.freecodecamp.org/news/how-to-dockerize-a-flask-app/)
