@@ -10,7 +10,9 @@ Event management appilcation deals with performing CRUD operations on Events.
 
 # Steps to run locally
 
+docker build -t eventmgt .
 
+docker run -d -p 8000:5000 eventmgt
 
 # Steps to run without cloning repository
 
@@ -25,3 +27,4 @@ Event management appilcation deals with performing CRUD operations on Events.
 
 # Reference 
 - [https://www.freecodecamp.org/news/how-to-dockerize-a-flask-app/](https://www.freecodecamp.org/news/how-to-dockerize-a-flask-app/)
+- [https://flask.palletsprojects.com/en/2.2.x/tutorial/factory/](https://flask.palletsprojects.com/en/2.2.x/tutorial/factory/)
