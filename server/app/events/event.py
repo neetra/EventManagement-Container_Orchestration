@@ -16,4 +16,4 @@ bp = Blueprint("auth", __name__, url_prefix="/event")
 
 @bp.route("/", methods=("GET", "POST"))
 def register():
-    return 'hello'
+    return 'hello from event'

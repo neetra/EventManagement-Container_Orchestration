@@ -1,8 +1,8 @@
 import os
 
-from flask import Flask
+from flask import Flask,jsonify
 
-import event;
+from events import event;
     
     # create and configure the app
 app = Flask(__name__, instance_relative_config=True)
@@ -13,7 +13,7 @@ app.register_blueprint(event.bp)
     # a simple page that says hello
 @app.route('/')
 def hello():
-    return 'Hello, World!'
+    return jsonify({'message' : 'Hello, World!'}), 200
 
 if __name__ == '__main__':
     # https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
