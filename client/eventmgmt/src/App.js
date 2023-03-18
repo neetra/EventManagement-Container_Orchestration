@@ -1,23 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
 import EventDetails from './EventDetails';
-
+import EventTable from './EventTable';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <EventDetails />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+ 
+    <Routes>
+      <Route  exact path="/" element={<EventTable />} />
+      <Route path="event/:id" element={<EventDetails />} />    
+
+    </Routes>
+
+   
   );
 }
 
