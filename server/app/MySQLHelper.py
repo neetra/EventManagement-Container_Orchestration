@@ -1,4 +1,6 @@
 import config
+import mysql.connector 
+import pymysql.cursors
 
 def createConnection():
         eventmgt_db=pymysql.connect(host=config.db_host,user=config.db_username,password=config.db_password,database=config.db_database,
