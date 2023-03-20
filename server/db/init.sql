@@ -16,12 +16,15 @@ VALUES
 
 
 CREATE TABLE events (
-  id INT NOT NULL AUTO_INCREMENT,
-  Name VARCHAR(100) Not NULL  
+  id VarCHAR(50),
+  Name VARCHAR(100) Not NULL  ,
+  HostBy varchar(50),
+  TimeStamp datetime null,
+  description varchar(255) null
  ); 
 
 
-insert into events (name) values ('gudipadwa');
+insert into events (id, name, HostBy, Description) values (UUID_SHORT(), 'gudipadwa', 'netra amrale', 'descr');
 
 
 

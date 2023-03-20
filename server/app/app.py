@@ -1,7 +1,4 @@
-import os
-
 from flask import Flask,jsonify
-
 from events import event;
     
     # create and configure the app

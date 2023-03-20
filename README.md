@@ -2,25 +2,11 @@
 
 Event management appilcation deals with performing CRUD operations on Events.
 
-
-# Technology Stack
-
-
-
-
 # Steps to run locally
-
-docker build -t eventmgt .
-
-docker run -d -p 8000:5000 eventmgt
-
-# Steps to run without cloning repository
-
-
-
-
-
-
+- Navigate to EventManagementContainerOrchestration folder and execute following command
+	```
+		docker compose up -d
+	```
 
 # Steps to run tests
 - Navigate to test folder

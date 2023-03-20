@@ -1,5 +1,5 @@
 import functools
-
+from configparser import Error
 from flask import Blueprint
 from flask import flash
 from flask import g
@@ -8,38 +8,59 @@ from flask import render_template
 from flask import request
 from flask import session
 from flask import url_for
-from werkzeug.security import check_password_hash
-from werkzeug.security import generate_password_hash
 import mysql.connector
+from events.MySQLEventProvider import MySQLEventProvider;
 import json;
+from events.JSONKeys import JSONKeys;
 
 bp = Blueprint("auth", __name__, url_prefix="/event")
-
-@bp.route("/", methods=("GET", "POST"))
+mysqlprovider = MySQLEventProvider()
+@bp.route("/", methods=["GET"])
 def register():
     return 'hello from event'
 
+@bp.route('/pingdb')
+def pingDB() -> str:
+    try:           
+        version = mysqlprovider.get_sql_version()
+        return { "MYSQL VERSION " : version, "Connection" : "Success"}, 200
+    except Error as e:
+        return "Error " + e, 400  
+    
+@bp.route('/events')
+def get_all_events() -> str:
+    try:           
+        allevents = mysqlprovider.get_all_events()
+        return allevents, 200
+    except Error as e:
+        return "Error " + e, 400     
 
-def test_table():
-    config = {
-        'user': 'root',
-        'password': 'root',
-        'host': 'db',
-        'port': '3306',
-        'database': 'devopsroles'
-    }
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM events')
-    results = [name for ( name) in cursor]
-    cursor.close()
-    connection.close()
-    return results
 
-@bp.route('/pingDB')
-def index() -> str:
-    return json.dumps({'test_table': test_table()})
+@bp.route('/', methods=["POST"])
+def add_event() -> str:
+    try:      
+        jsonData = request.json      
+        allevents = mysqlprovider.add_event(jsonData)
+        return allevents, 200
+    except Error as e:
+        return "Error " + e, 400       
+    
 
-@bp.route('/pingDB2')
-def index() -> str:
-    return json.dumps({'test_table': 'tmep'})
+@bp.route(rule="",methods=["Get"])
+def get_event_by_id() -> str:
+    try:      
+        jsonData = request.args.get(JSONKeys.EventIdParam)      
+        allevents = mysqlprovider.get_event_by_id_or_name(jsonData)
+        return allevents, 200
+    except Error as e:
+        return "Error " + e, 400           
+    
+
+@bp.route(rule="",methods=["Delete"])
+def del_event_by_id() -> str:
+    try:      
+        jsonData = request.args.get(JSONKeys.EventIdParam)      
+        allevents = mysqlprovider.delete_event_by_id(jsonData)
+        return  json.dumps({'message':'event deleted successfully'}) ,200
+    except Error as e:
+        return "Error " + e, 400        
