@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 client/eventmgmt/package-lock.json
 client/node_modules/*
+server/app/config-local.py
+server/app/config-local-docker.py

@@ -6,7 +6,7 @@ from flask import g
 from flask import redirect
 from flask import render_template
 from flask import request
-from flask import session
+from flask import session, jsonify
 from flask import url_for
 import mysql.connector
 from events.MySQLEventProvider import MySQLEventProvider;
@@ -17,7 +17,7 @@ bp = Blueprint("auth", __name__, url_prefix="/event")
 mysqlprovider = MySQLEventProvider()
 @bp.route("/", methods=["GET"])
 def register():
-    return 'hello from event'
+    return jsonify({ 'message': 'hello from event'})
 
 @bp.route('/pingdb')
 def pingDB() -> str:
@@ -36,7 +36,7 @@ def get_all_events() -> str:
         return "Error " + e, 400     
 
 
-@bp.route('/', methods=["POST"])
+@bp.route("", methods=["POST"])
 def add_event() -> str:
     try:      
         jsonData = request.json      

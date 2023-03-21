@@ -1,8 +1,10 @@
 from flask import Flask,jsonify
 from events import event;
+from flask_cors import CORS
     
     # create and configure the app
 app = Flask(__name__, instance_relative_config=True)
+CORS(app)
 app.register_blueprint(event.bp)
 #app.add_url_rule("/", endpoint="index")    
 

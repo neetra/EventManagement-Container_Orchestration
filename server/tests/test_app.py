@@ -1,14 +1,16 @@
 # for running python test_app.py uncomment2 and comment 4
 # from app import app
 
-from app.app import app
-
+import requests;
 import json;
 
+ENDPOINT= "http://127.0.0.1:5003/"
+
 def test_ping():
-    response = app.test_client().get('/')    
+    response = requests.get(ENDPOINT)
+    data = (response.json())
     assert response.status_code == 200
-    message = json.loads(response.data )['message']
+    message = data['message']
     assert message == "Hello, World!"
 
 def test_answer():

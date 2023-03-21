@@ -2,16 +2,15 @@
 FROM node:18-alpine
 
 # set working directory
-WORKDIR /usr/src/eventfrontend
+WORKDIR /frontend
 
-# add `/usr/src/app/node_modules/.bin` to $PATH
-ENV PATH /usr/src/eventfrontend/node_modules/.bin:$PATH
+
 
 # install and cache app dependencies
-COPY package.json .
-COPY package-lock.json .
-RUN npm ci
+COPY package.json /frontend/package.json
+COPY package-lock.json /frontend/package-lock.json
+RUN npm i
 RUN npm install react-scripts@5.0.1 -g --silent
-
+COPY . /frontend
 # start app
 CMD ["npm", "start"]
